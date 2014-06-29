@@ -6,7 +6,7 @@ import (
 )
 func main() {
 	lang := "eng"
-	filename := "golangref.png"
+	filename := "<add your png/jpeg image>"
 	env := ocr.Env()
 	fmt.Println(env)
 	version := ocr.Version()
