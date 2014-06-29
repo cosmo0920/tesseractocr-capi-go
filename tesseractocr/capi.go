@@ -1,11 +1,11 @@
 package tesseractocr
-
 // #include <stdio.h>
 // #include <tesseract/capi.h>
-// #cgo pkg-config: tesseract
 import "C"
-import "os"
-import "errors"
+import (
+	"os"
+	"errors"
+)
 
 var (
 	api *C.struct_TessBaseAPI
