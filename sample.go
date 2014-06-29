@@ -10,7 +10,6 @@ func main() {
 	lang := "eng"
 	filename := "<add your png/jpeg image>"
 	env := ocr.Env()
-	fmt.Println(env)
 	version := ocr.Version()
 	fmt.Println("tesseract version: " + version)
 	ocr.BaseAPICreate()
