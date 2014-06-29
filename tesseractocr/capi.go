@@ -30,24 +30,34 @@ func BaseAPICreate() {
 	api = C.TessBaseAPICreate()
 }
 
-func BaseAPIDelete() {
+func BaseAPIDelete() error {
+	if api == nil {
+		return errors.New("call BaseAPICreate() first")
+	}
 	C.TessBaseAPIDelete(api)
+	return nil
 }
 
 func BaseAPIInit3(env string, lang string) (C.int, error) {
 	cenv := C.CString(env)
 	clang := C.CString(lang)
+	if api == nil {
+		return 2, errors.New("call BaseAPICreate() first")
+	}
 	rc := C.TessBaseAPIInit3(api, cenv, clang)
 	if rc != 0 {
-		BaseAPIDelete()
+		_ = BaseAPIDelete()
 		return rc, errors.New("Could not initialize tesseract.")
 	}
 	return rc, nil
 }
 
-func BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec C.int) string {
+func BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec C.int) (string, error) {
 	cfilename := C.CString(filename)
+	if api == nil {
+		return "", errors.New("call BaseAPICreate() first")
+	}
 	out := C.TessBaseAPIProcessPages(api, cfilename, retry_config, 0)
 	result := C.GoString(out)
-	return result
+	return result, nil
 }

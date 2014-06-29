@@ -17,6 +17,6 @@ func main() {
 	if err != nil {
 		os.Exit(3)
 	}
-	result := ocr.BaseAPIProcessPages(filename, nil, 0)
+	result, err := ocr.BaseAPIProcessPages(filename, nil, 0)
 	fmt.Println(result)
 }
