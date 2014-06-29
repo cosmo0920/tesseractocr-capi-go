@@ -1,4 +1,5 @@
 package tesseractocr
+
 // #include <stdio.h>
 // #include <tesseract/capi.h>
 // #cgo pkg-config: tesseract
@@ -18,7 +19,7 @@ func Version() string {
 
 func Env() string {
 	env := os.Getenv("TESSDATA_PREFIX")
-	if (env == "") {
+	if env == "" {
 		env = "../"
 	}
 	return env
@@ -36,7 +37,7 @@ func BaseAPIInit3(env string, lang string) (C.int, error) {
 	cenv := C.CString(env)
 	clang := C.CString(lang)
 	rc := C.TessBaseAPIInit3(api, cenv, clang)
-	if (rc != 0) {
+	if rc != 0 {
 		BaseAPIDelete()
 		return rc, errors.New("Could not initialize tesseract.")
 	}
