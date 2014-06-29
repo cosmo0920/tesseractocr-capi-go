@@ -61,3 +61,30 @@ func BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec
 	result := C.GoString(out)
 	return result, nil
 }
+
+func BaseAPISetVariable(name string, value string) (C.int, error) {
+	cname := C.CString(name)
+	cvalue := C.CString(value)
+	if api == nil {
+		return 2, errors.New("call BaseAPICreate() first")
+	}
+	return C.TessBaseAPISetVariable(api, cname, cvalue), nil
+}
+
+func BaseAPISetOutputName(path string) (error) {
+	cpath := C.CString(path)
+	if api == nil {
+		return errors.New("call BaseAPICreate() first")
+	}
+	C.TessBaseAPISetOutputName(api, cpath)
+	return nil
+}
+
+func BaseAPIPrintVariablesToFile(name string) (error) {
+	cname := C.CString(name)
+	if api == nil {
+		return errors.New("call BaseAPICreate() first")
+	}
+	C.TessBaseAPIPrintVariablesToFile(api, cname)
+	return nil
+}
