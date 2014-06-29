@@ -6,6 +6,8 @@ import (
 	"os"
 )
 
+const abort = 3
+
 func main() {
 	lang := "eng"
 	filename := "<add your png/jpeg image>"
@@ -15,7 +17,7 @@ func main() {
 	ocr.BaseAPICreate()
 	_, err := ocr.BaseAPIInit3(env, lang)
 	if err != nil {
-		os.Exit(3)
+		os.Exit(abort)
 	}
 	result, err := ocr.BaseAPIProcessPages(filename, nil, 0)
 	fmt.Println(result)
