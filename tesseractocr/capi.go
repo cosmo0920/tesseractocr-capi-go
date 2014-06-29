@@ -79,7 +79,7 @@ func BaseAPISetVariable(name string, value string) (C.int, error) {
 	return C.TessBaseAPISetVariable(api, cname, cvalue), nil
 }
 
-func BaseAPISetOutputName(path string) (error) {
+func BaseAPISetOutputName(path string) error {
 	cpath := C.CString(path)
 	if api == nil {
 		return errors.New("call BaseAPICreate() first")
@@ -88,7 +88,7 @@ func BaseAPISetOutputName(path string) (error) {
 	return nil
 }
 
-func BaseAPIPrintVariablesToFile(name string) (error) {
+func BaseAPIPrintVariablesToFile(name string) error {
 	cname := C.CString(name)
 	if api == nil {
 		return errors.New("call BaseAPICreate() first")
