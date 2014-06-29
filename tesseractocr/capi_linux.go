@@ -2,8 +2,6 @@
 
 package tesseractocr
 
-// #include <stdio.h>
-// #include <tesseract/capi.h>
 // #cgo LDFLAGS: -ltesseract -llept
 import "C"
 
