@@ -1,10 +1,11 @@
 package tesseractocr
+
 // #include <stdio.h>
 // #include <tesseract/capi.h>
 import "C"
 import (
-	"os"
 	"errors"
+	"os"
 )
 
 var (
