@@ -6,7 +6,7 @@ go:
   - 1.3
 
 install:
-  - sudo apt-get install -qq libtesseract-dev libleptonica-dev
+  - bash install.sh
 
 script:
   - go build sample.go
