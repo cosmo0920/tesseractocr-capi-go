@@ -1,6 +1,8 @@
 TesseractOCR C API Go wrapper
 ===
 
+[![Build Status](https://travis-ci.org/cosmo0920/tesseractocr-capi-go.svg?branch=master)](https://travis-ci.org/cosmo0920/tesseractocr-capi-go)
+
 ## instalation
 
 Before you use this library, please install `tesseract-ocr`.
