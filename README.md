@@ -30,3 +30,7 @@ or
 ```go
 import "github.com/cosmo0920/tesseractocr-capi-go/tesseractocr"
 ```
+
+## LICENSE
+
+[Apache License 2.0](LICENSE)
