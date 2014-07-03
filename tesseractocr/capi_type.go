@@ -5,13 +5,13 @@ package tesseractocr
 import "C"
 
 type Rectangle struct {
-	left int
-	top int
-	width int
-	height int
+	left C.int
+	top C.int
+	width C.int
+	height C.int
 }
 
-func (rect *Rectangle) SetRectangle(left int, top int, width int, height int) {
+func (rect *Rectangle) SetRectangle(left C.int, top C.int, width C.int, height C.int) {
 	rect.left = left
 	rect.top = top
 	rect.width = width

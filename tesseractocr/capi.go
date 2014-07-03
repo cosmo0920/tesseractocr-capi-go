@@ -84,5 +84,9 @@ func (t *TesseractAPI) BaseAPISetImage2(pix *C.struct_Pix) {
 }
 
 func (t *TesseractAPI) BaseAPISetSourceResolution(ppi C.int) {
-	C. TessBaseAPISetSourceResolution(t.api, ppi);
+	C.TessBaseAPISetSourceResolution(t.api, ppi);
+}
+
+func (t *TesseractAPI) BaseAPISetRectangle(rect Rectangle) {
+	C.TessBaseAPISetRectangle(t.api, rect.left, rect.top, rect.width, rect.height)
 }
