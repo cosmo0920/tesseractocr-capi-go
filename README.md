@@ -1,7 +1,7 @@
 TesseractOCR C API Go wrapper
 ===
 
-[![Build Status](https://travis-ci.org/cosmo0920/tesseractocr-capi-go.svg?branch=master)](https://travis-ci.org/cosmo0920/tesseractocr-capi-go)
+[![Build Status](https://travis-ci.org/cosmo0920/tesseractocr-capi-go.svg?branch=master)](https://travis-ci.org/cosmo0920/tesseractocr-capi-go) [![GoDoc](https://godoc.org/github.com/cosmo0920/tesseractocr-capi-go/tesseractocr?status.png)](https://godoc.org/github.com/cosmo0920/tesseractocr-capi-go/tesseractocr)
 
 ## instalation
 
