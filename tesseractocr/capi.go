@@ -56,37 +56,33 @@ func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
 	return rc, nil
 }
 
-func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec C.int) (string, error) {
+func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec C.int) string {
 	cfilename := C.CString(filename)
 	out := C.TessBaseAPIProcessPages(t.api, cfilename, retry_config, 0)
 	result := C.GoString(out)
-	return result, nil
+	return result
 }
 
-func (t *TesseractAPI) BaseAPISetVariable(name string, value string) (C.int, error) {
+func (t *TesseractAPI) BaseAPISetVariable(name string, value string) C.int {
 	cname := C.CString(name)
 	cvalue := C.CString(value)
-	return C.TessBaseAPISetVariable(t.api, cname, cvalue), nil
+	return C.TessBaseAPISetVariable(t.api, cname, cvalue)
 }
 
-func (t *TesseractAPI) BaseAPISetOutputName(path string) error {
+func (t *TesseractAPI) BaseAPISetOutputName(path string) {
 	cpath := C.CString(path)
 	C.TessBaseAPISetOutputName(t.api, cpath)
-	return nil
 }
 
-func (t *TesseractAPI) BaseAPIPrintVariablesToFile(name string) error {
+func (t *TesseractAPI) BaseAPIPrintVariablesToFile(name string) {
 	cname := C.CString(name)
 	C.TessBaseAPIPrintVariablesToFile(t.api, cname)
-	return nil
 }
 
-func (t *TesseractAPI) BaseAPISetImage2(pix *C.struct_Pix) error {
+func (t *TesseractAPI) BaseAPISetImage2(pix *C.struct_Pix) {
 	C.TessBaseAPISetImage2(t.api, pix);
-	return nil
 }
 
-func (t *TesseractAPI) BaseAPISetSourceResolution(ppi C.int) error {
+func (t *TesseractAPI) BaseAPISetSourceResolution(ppi C.int) {
 	C. TessBaseAPISetSourceResolution(t.api, ppi);
-	return nil
 }

@@ -19,6 +19,6 @@ func main() {
 	if err != nil {
 		os.Exit(abort)
 	}
-	result, err := api.BaseAPIProcessPages(filename, nil, 0)
+	result := api.BaseAPIProcessPages(filename, nil, 0)
 	fmt.Println(result)
 }
