@@ -8,10 +8,6 @@ import (
 	"os"
 )
 
-var (
-	api *C.struct_TessBaseAPI
-)
-
 const (
 	success = iota
 	failure
@@ -34,65 +30,53 @@ func Env() string {
 	return env
 }
 
-func BaseAPICreate() {
-	api = C.TessBaseAPICreate()
+func BaseAPICreate() *C.struct_TessBaseAPI {
+	return C.TessBaseAPICreate()
 }
 
-func BaseAPIDelete() error {
-	if api == nil {
-		return errors.New("call BaseAPICreate() first")
-	}
-	C.TessBaseAPIDelete(api)
+func BaseAPINew() *TesseractAPI {
+	tesseract := BaseAPICreate()
+	t := &TesseractAPI{tesseract}
+	return t
+}
+
+func (t *TesseractAPI) BaseAPIDelete() error {
+	C.TessBaseAPIDelete(t.api)
 	return nil
 }
 
-func BaseAPIInit3(env string, lang string) (C.int, error) {
+func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
 	cenv := C.CString(env)
 	clang := C.CString(lang)
-	if api == nil {
-		return uninitialized, errors.New("call BaseAPICreate() first")
-	}
-	rc := C.TessBaseAPIInit3(api, cenv, clang)
+	rc := C.TessBaseAPIInit3(t.api, cenv, clang)
 	if rc != success {
-		_ = BaseAPIDelete()
+		_ = t.BaseAPIDelete()
 		return rc, errors.New("Could not initialize tesseract.")
 	}
 	return rc, nil
 }
 
-func BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec C.int) (string, error) {
+func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec C.int) (string, error) {
 	cfilename := C.CString(filename)
-	if api == nil {
-		return "", errors.New("call BaseAPICreate() first")
-	}
-	out := C.TessBaseAPIProcessPages(api, cfilename, retry_config, 0)
+	out := C.TessBaseAPIProcessPages(t.api, cfilename, retry_config, 0)
 	result := C.GoString(out)
 	return result, nil
 }
 
-func BaseAPISetVariable(name string, value string) (C.int, error) {
+func (t *TesseractAPI) BaseAPISetVariable(name string, value string) (C.int, error) {
 	cname := C.CString(name)
 	cvalue := C.CString(value)
-	if api == nil {
-		return uninitialized, errors.New("call BaseAPICreate() first")
-	}
-	return C.TessBaseAPISetVariable(api, cname, cvalue), nil
+	return C.TessBaseAPISetVariable(t.api, cname, cvalue), nil
 }
 
-func BaseAPISetOutputName(path string) error {
+func (t *TesseractAPI) BaseAPISetOutputName(path string) error {
 	cpath := C.CString(path)
-	if api == nil {
-		return errors.New("call BaseAPICreate() first")
-	}
-	C.TessBaseAPISetOutputName(api, cpath)
+	C.TessBaseAPISetOutputName(t.api, cpath)
 	return nil
 }
 
-func BaseAPIPrintVariablesToFile(name string) error {
+func (t *TesseractAPI) BaseAPIPrintVariablesToFile(name string) error {
 	cname := C.CString(name)
-	if api == nil {
-		return errors.New("call BaseAPICreate() first")
-	}
-	C.TessBaseAPIPrintVariablesToFile(api, cname)
+	C.TessBaseAPIPrintVariablesToFile(t.api, cname)
 	return nil
 }
