@@ -80,3 +80,13 @@ func (t *TesseractAPI) BaseAPIPrintVariablesToFile(name string) error {
 	C.TessBaseAPIPrintVariablesToFile(t.api, cname)
 	return nil
 }
+
+func (t *TesseractAPI) BaseAPISetImage2(pix *C.struct_Pix) error {
+	C.TessBaseAPISetImage2(t.api, pix);
+	return nil
+}
+
+func (t *TesseractAPI) BaseAPISetSourceResolution(ppi C.int) error {
+	C. TessBaseAPISetSourceResolution(t.api, ppi);
+	return nil
+}
