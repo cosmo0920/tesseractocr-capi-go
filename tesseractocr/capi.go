@@ -79,9 +79,10 @@ func (t *TesseractAPI) BaseAPIPrintVariablesToFile(name string) {
 	C.TessBaseAPIPrintVariablesToFile(t.api, cname)
 }
 
-func (t *TesseractAPI) BaseAPISetImage2(pix *C.struct_Pix) {
-	C.TessBaseAPISetImage2(t.api, pix);
-}
+// TODO: support Pix* struct type method
+// func (t *TesseractAPI) BaseAPISetImage2(pix *C.struct_Pix) {
+// 	C.TessBaseAPISetImage2(t.api, pix);
+// }
 
 func (t *TesseractAPI) BaseAPISetSourceResolution(ppi C.int) {
 	C.TessBaseAPISetSourceResolution(t.api, ppi);
