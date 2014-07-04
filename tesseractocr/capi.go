@@ -30,12 +30,12 @@ func Env() string {
 	return env
 }
 
-func BaseAPICreate() *C.struct_TessBaseAPI {
+func baseAPICreate() *C.struct_TessBaseAPI {
 	return C.TessBaseAPICreate()
 }
 
 func BaseAPINew() *TesseractAPI {
-	tesseract := BaseAPICreate()
+	tesseract := baseAPICreate()
 	t := &TesseractAPI{tesseract}
 	return t
 }
