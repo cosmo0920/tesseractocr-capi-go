@@ -9,4 +9,5 @@ install:
   - bash install.sh
 
 script:
-  - go build sample.go
+  - go build example/sample.go
+  - go test
