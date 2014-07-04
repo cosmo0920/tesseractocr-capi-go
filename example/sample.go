@@ -1,7 +1,7 @@
 package main
 
 import (
-	ocr "./tesseractocr"
+	ocr "../tesseractocr"
 	"fmt"
 	"os"
 )
