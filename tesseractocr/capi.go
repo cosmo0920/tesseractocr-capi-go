@@ -88,6 +88,10 @@ func (t *TesseractAPI) BaseAPISetOutputName(path string) {
 	C.TessBaseAPISetOutputName(t.api, cPath)
 }
 
+func (t *TesseractAPI) BaseAPIPrintVariables() {
+	C.TessBaseAPIPrintVariables(t.api, (*C.FILE)(C.stdout))
+}
+
 func (t *TesseractAPI) BaseAPIPrintVariablesToFile(name string) {
 	cName := C.CString(name)
 	defer C.free(unsafe.Pointer(cName))
