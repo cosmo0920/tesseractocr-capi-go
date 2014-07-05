@@ -42,9 +42,12 @@ func BaseAPINew() *TesseractAPI {
 	return t
 }
 
-func (t *TesseractAPI) BaseAPIDelete() error {
+func (t *TesseractAPI) BaseAPIClear() {
+	C.TessBaseAPIClear(t.api)
+}
+
+func (t *TesseractAPI) BaseAPIDelete() {
 	C.TessBaseAPIDelete(t.api)
-	return nil
 }
 
 func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
@@ -56,7 +59,7 @@ func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
 
 	rc := C.TessBaseAPIInit3(t.api, cEnv, cLang)
 	if rc != success {
-		_ = t.BaseAPIDelete()
+		t.BaseAPIDelete()
 		return rc, errors.New("Could not initialize tesseract.")
 	}
 	return rc, nil
