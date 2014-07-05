@@ -1,11 +1,13 @@
 package tesseractocr
 
 // #include <stdio.h>
+// #include <stdlib.h>
 // #include <tesseract/capi.h>
 import "C"
 import (
 	"errors"
 	"os"
+	"unsafe"
 )
 
 const (
@@ -17,8 +19,8 @@ const (
 )
 
 func Version() string {
-	c_version := C.TessVersion()
-	version := C.GoString(c_version)
+	cVersion := C.TessVersion()
+	version := C.GoString(cVersion)
 	return version
 }
 
@@ -46,9 +48,13 @@ func (t *TesseractAPI) BaseAPIDelete() error {
 }
 
 func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
-	cenv := C.CString(env)
-	clang := C.CString(lang)
-	rc := C.TessBaseAPIInit3(t.api, cenv, clang)
+	cEnv := C.CString(env)
+	defer C.free(unsafe.Pointer(cEnv))
+
+	cLang := C.CString(lang)
+	defer C.free(unsafe.Pointer(cLang))
+
+	rc := C.TessBaseAPIInit3(t.api, cEnv, cLang)
 	if rc != success {
 		_ = t.BaseAPIDelete()
 		return rc, errors.New("Could not initialize tesseract.")
@@ -57,26 +63,36 @@ func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
 }
 
 func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec C.int) string {
-	cfilename := C.CString(filename)
-	out := C.TessBaseAPIProcessPages(t.api, cfilename, retry_config, 0)
+	cFilename := C.CString(filename)
+	defer C.free(unsafe.Pointer(cFilename))
+
+	out := C.TessBaseAPIProcessPages(t.api, cFilename, retry_config, 0)
 	result := C.GoString(out)
 	return result
 }
 
 func (t *TesseractAPI) BaseAPISetVariable(name string, value string) C.int {
-	cname := C.CString(name)
-	cvalue := C.CString(value)
-	return C.TessBaseAPISetVariable(t.api, cname, cvalue)
+	cName := C.CString(name)
+	defer C.free(unsafe.Pointer(cName))
+
+	cValue := C.CString(value)
+	defer  C.free(unsafe.Pointer(cValue))
+
+	return C.TessBaseAPISetVariable(t.api, cName, cValue)
 }
 
 func (t *TesseractAPI) BaseAPISetOutputName(path string) {
-	cpath := C.CString(path)
-	C.TessBaseAPISetOutputName(t.api, cpath)
+	cPath := C.CString(path)
+	defer C.free(unsafe.Pointer(cPath))
+
+	C.TessBaseAPISetOutputName(t.api, cPath)
 }
 
 func (t *TesseractAPI) BaseAPIPrintVariablesToFile(name string) {
-	cname := C.CString(name)
-	C.TessBaseAPIPrintVariablesToFile(t.api, cname)
+	cName := C.CString(name)
+	defer C.free(unsafe.Pointer(cName))
+
+	C.TessBaseAPIPrintVariablesToFile(t.api, cName)
 }
 
 // TODO: support Pix* struct type method
