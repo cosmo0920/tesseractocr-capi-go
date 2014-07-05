@@ -10,7 +10,7 @@ const abort = 3
 
 func main() {
 	lang := "eng"
-	filename := "fixture/golangref.png"
+	filename := "fixture/golangref.tiff"
 	env := ocr.Env()
 	version := ocr.Version()
 	fmt.Println("tesseract version: " + version)
