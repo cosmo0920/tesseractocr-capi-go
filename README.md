@@ -19,6 +19,13 @@ $ brew install tesseract-ocr --all-languages --with-tiff
 $ sudo aptget-install tesseractocr-dev libleptonica-dev
 ```
 
+### FreeBSD
+
+```bash
+$ export CC=clang
+$ sudo pkg install -y tesseract pkgconf
+```
+
 ## import
 
 ```bash
