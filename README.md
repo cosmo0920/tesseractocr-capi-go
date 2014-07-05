@@ -19,7 +19,7 @@ $ brew install tesseract-ocr --all-languages --with-tiff
 $ sudo aptget-install tesseractocr-dev libleptonica-dev
 ```
 
-### FreeBSD
+### FreeBSD (pkgng)
 
 ```bash
 $ export CC=clang
@@ -32,7 +32,7 @@ $ sudo pkg install -y tesseract pkgconf
 $ go get "github.com/cosmo0920/tesseractocr-capi-go/tesseractocr"
 ```
 
-or
+and then,
 
 ```go
 import "github.com/cosmo0920/tesseractocr-capi-go/tesseractocr"
