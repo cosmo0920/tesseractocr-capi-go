@@ -16,7 +16,8 @@ $ brew install tesseract-ocr --all-languages --with-tiff
 ### Ubuntu Linux
 
 ```bash
-$ sudo aptget-install tesseractocr-dev libleptonica-dev
+$ sudo apt-get install libtesserac-dev libleptonica-dev
+$ sudo apt-get install tesseract-ocr-eng tesseract-ocr-jpn
 ```
 
 ### FreeBSD (pkgng)
@@ -24,6 +25,7 @@ $ sudo aptget-install tesseractocr-dev libleptonica-dev
 ```bash
 $ export CC=clang
 $ sudo pkg install -y tesseract pkgconf
+$ sudo pkg install -y tesseract-data
 ```
 
 ## import
