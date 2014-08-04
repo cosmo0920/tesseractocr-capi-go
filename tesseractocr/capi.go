@@ -38,7 +38,7 @@ func baseAPICreate() *C.struct_TessBaseAPI {
 
 func BaseAPINew() *TesseractAPI {
 	tesseract := baseAPICreate()
-	t := &TesseractAPI{tesseract}
+	t := &TesseractAPI{api: tesseract}
 	return t
 }
 
@@ -47,7 +47,13 @@ func (t *TesseractAPI) BaseAPIClear() {
 }
 
 func (t *TesseractAPI) BaseAPIDelete() {
-	C.TessBaseAPIDelete(t.api)
+	t.mutex.Lock()
+	defer t.mutex.Unlock()
+
+	if !t.disposed {
+		C.TessBaseAPIDelete(t.api)
+		t.disposed = true
+	}
 }
 
 func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
