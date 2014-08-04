@@ -3,6 +3,7 @@ package tesseractocr
 // #include <stdio.h>
 // #include <tesseract/capi.h>
 import "C"
+import "sync"
 
 type Rectangle struct {
 	left C.int
@@ -13,4 +14,6 @@ type Rectangle struct {
 
 type TesseractAPI struct {
 	api *C.struct_TessBaseAPI
+	disposed bool
+	mutex sync.Mutex
 }
