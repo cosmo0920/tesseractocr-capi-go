@@ -8,6 +8,7 @@ import (
 	"errors"
 	"os"
 	"unsafe"
+	lept "github.com/cosmo0920/leptonica-capi-go/leptonica"
 )
 
 const (
@@ -108,10 +109,10 @@ func (t *TesseractAPI) BaseAPIPrintVariablesToFile(name string) {
 	C.TessBaseAPIPrintVariablesToFile(t.api, cName)
 }
 
-// TODO: support Pix* struct type method
-// func (t *TesseractAPI) BaseAPISetImage2(pix *C.struct_Pix) {
-// 	C.TessBaseAPISetImage2(t.api, pix);
-// }
+func (t *TesseractAPI) BaseAPISetImage(pix *lept.Pix) {
+	cPix := pix.RawPix()
+	C.TessBaseAPISetImage2(t.api, (*C.struct_Pix)(unsafe.Pointer(cPix)));
+}
 
 func (t *TesseractAPI) BaseAPISetSourceResolution(ppi C.int) {
 	C.TessBaseAPISetSourceResolution(t.api, ppi);
