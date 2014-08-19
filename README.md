@@ -36,7 +36,10 @@ $ sudo pkg install -y tesseract-data
 
 ## import
 
+This library depends on https://github.com/cosmo0920/leptonica-capi-go/.
+
 ```bash
+$ go get "github.com/cosmo0920/leptonica-capi-go/leptonica"
 $ go get "github.com/cosmo0920/tesseractocr-capi-go/tesseractocr"
 ```
 
