@@ -3,7 +3,7 @@ package tesseractocr_test
 import (
 	ocr "./tesseractocr"
 	"testing"
-	)
+)
 
 func TestBaseAPINew(t *testing.T) {
 	result := ocr.BaseAPINew()
