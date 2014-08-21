@@ -3,9 +3,9 @@ sudo apt-get install libpng12-dev libjpeg62-dev libtiff4-dev libsdl-gfx1.2-dev l
 sudo apt-get install python-enchant python-poppler
 
 cd /tmp
-wget http://www.leptonica.com/source/leptonica-1.69.tar.gz
-tar -xvzof leptonica-1.69.tar.gz
-cd leptonica-1.69
+wget http://www.leptonica.com/source/leptonica-1.70.tar.gz
+tar -xvzof leptonica-1.70.tar.gz
+cd leptonica-1.70
 ./configure
 make
 sudo make install
