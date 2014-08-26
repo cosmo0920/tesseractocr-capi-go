@@ -114,6 +114,12 @@ func (t *TesseractAPI) BaseAPISetImage(pix *lept.Pix) {
 	C.TessBaseAPISetImage2(t.api, (*C.struct_Pix)(unsafe.Pointer(cPix)));
 }
 
+// wrapper function lept.PixClose()
+// ClearPix Ptr lept.Pix -> Unit
+func ClearPix(pix *lept.Pix) {
+	pix.PixClose()
+}
+
 func (t *TesseractAPI) BaseAPISetSourceResolution(ppi C.int) {
 	C.TessBaseAPISetSourceResolution(t.api, ppi);
 }
