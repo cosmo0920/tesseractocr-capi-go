@@ -171,12 +171,6 @@ func (t *TesseractAPI) BaseAPIGetUTF8Text() string {
 // 	return device
 // }
 
-// wrapper function lept.PixClose()
-// ClearPix Ptr lept.Pix -> Unit
-func ClearPix(pix *lept.Pix) {
-	pix.PixClose()
-}
-
 func (t *TesseractAPI) BaseAPISetSourceResolution(ppi int) {
 	C.TessBaseAPISetSourceResolution(t.api, C.int(ppi));
 }
