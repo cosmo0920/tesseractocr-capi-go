@@ -14,9 +14,8 @@ func main() {
 	env := ocr.Env()
 	version := ocr.Version()
 	fmt.Println("tesseract version: " + version)
-	api := ocr.BaseAPINew()
 	oem := ocr.OEM_CUBE_ONLY
-	_, err := api.BaseAPIInit2(env, lang, oem)
+	api, err := ocr.BaseAPIInit2(env, lang, oem)
 	if err != nil {
 		os.Exit(abort)
 	}

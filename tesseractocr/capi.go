@@ -7,6 +7,7 @@ import "C"
 import (
 	"errors"
 	"os"
+	"runtime"
 	"unsafe"
 	lept "github.com/cosmo0920/leptonica-capi-go/leptonica"
 )
@@ -42,21 +43,18 @@ func Env() string {
 	return env
 }
 
-func baseAPICreate() *C.struct_TessBaseAPI {
-	return C.TessBaseAPICreate()
-}
-
-func BaseAPINew() *TesseractAPI {
-	tesseract := baseAPICreate()
-	t := &TesseractAPI{api: tesseract}
-	return t
-}
 
 func (t *TesseractAPI) BaseAPIClear() {
 	C.TessBaseAPIClear(t.api)
 }
 
-func (t *TesseractAPI) BaseAPIDelete() {
+func baseAPINew() *TesseractAPI {
+	tesseract := C.TessBaseAPICreate()
+	t := &TesseractAPI{api: tesseract}
+	return t
+}
+
+func (t *TesseractAPI) baseAPIDelete() {
 	t.mutex.Lock()
 	defer t.mutex.Unlock()
 
@@ -66,34 +64,54 @@ func (t *TesseractAPI) BaseAPIDelete() {
 	}
 }
 
-func (t *TesseractAPI) BaseAPIInit2(env string, lang string, oem TessOcrEngineMode) (C.int, error) {
-	cEnv := C.CString(env)
-	defer C.free(unsafe.Pointer(cEnv))
+func (t *TesseractAPI) baseAPIEnd() {
+	t.mutex.Lock()
+	defer t.mutex.Unlock()
 
-	cLang := C.CString(lang)
-	defer C.free(unsafe.Pointer(cLang))
-
-	rc := C.TessBaseAPIInit2(t.api, cEnv, cLang, C.TessOcrEngineMode(oem))
-	if rc != success {
-		t.BaseAPIDelete()
-		return rc, errors.New("Could not initialize tesseract.")
+	if !t.disposed {
+		C.TessBaseAPIEnd(t.api)
 	}
-	return rc, nil
 }
 
-func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
+func (t *TesseractAPI) finalize() {
+	t.baseAPIEnd()
+	t.baseAPIDelete()
+}
+
+func BaseAPIInit2(env string, lang string, oem TessOcrEngineMode) (*TesseractAPI, error) {
 	cEnv := C.CString(env)
 	defer C.free(unsafe.Pointer(cEnv))
 
 	cLang := C.CString(lang)
 	defer C.free(unsafe.Pointer(cLang))
 
-	rc := C.TessBaseAPIInit3(t.api, cEnv, cLang)
+	instance := baseAPINew()
+
+	rc := C.TessBaseAPIInit2(instance.api, cEnv, cLang, C.TessOcrEngineMode(oem))
 	if rc != success {
-		t.BaseAPIDelete()
-		return rc, errors.New("Could not initialize tesseract.")
+		return nil, errors.New("Could not initialize tesseract.")
 	}
-	return rc, nil
+
+	runtime.SetFinalizer(instance, (*TesseractAPI).finalize)
+	return instance, nil
+}
+
+func BaseAPIInit3(env string, lang string) (*TesseractAPI, error) {
+	cEnv := C.CString(env)
+	defer C.free(unsafe.Pointer(cEnv))
+
+	cLang := C.CString(lang)
+	defer C.free(unsafe.Pointer(cLang))
+
+	instance := baseAPINew()
+
+	rc := C.TessBaseAPIInit3(instance.api, cEnv, cLang)
+	if rc != success {
+		return nil, errors.New("Could not initialize tesseract.")
+	}
+
+	runtime.SetFinalizer(instance, (*TesseractAPI).finalize)
+	return instance, nil
 }
 
 func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec int) string {
@@ -152,15 +170,6 @@ func (t *TesseractAPI) BaseAPIGetUTF8Text() string {
 // 	C.TessBaseAPIGetOpenCLDevice(t.api, device)
 // 	return device
 // }
-
-func (t *TesseractAPI) BaseAPIEnd() {
-	t.mutex.Lock()
-	defer t.mutex.Unlock()
-
-	if !t.disposed {
-		C.TessBaseAPIEnd(t.api)
-	}
-}
 
 // wrapper function lept.PixClose()
 // ClearPix Ptr lept.Pix -> Unit
