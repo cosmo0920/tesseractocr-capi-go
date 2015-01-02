@@ -69,6 +69,7 @@ func (t *TesseractAPI) baseAPIEnd() {
 
 	if !t.disposed {
 		C.TessBaseAPIEnd(t.api)
+		t.disposed = true
 	}
 }
 
