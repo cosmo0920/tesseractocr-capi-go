@@ -155,6 +155,7 @@ func (t *TesseractAPI) BaseAPIGetUTF8Text() string {
 func (t *TesseractAPI) BaseAPIEnd() {
 	t.mutex.Lock()
 	defer t.mutex.Unlock()
+
 	if !t.disposed {
 		C.TessBaseAPIEnd(t.api)
 	}
