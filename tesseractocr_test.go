@@ -5,13 +5,6 @@ import (
 	"testing"
 )
 
-// func TestBaseAPINew(t *testing.T) {
-// 	result := ocr.BaseAPINew()
-// 	if result == nil {
-// 		t.Errorf("result = %v cannot nil", result)
-// 	}
-// }
-
 func TestBaseAPIInit2(t *testing.T) {
 	lang := "eng"
 	env := ocr.Env()
