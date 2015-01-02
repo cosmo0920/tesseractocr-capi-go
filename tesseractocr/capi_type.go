@@ -6,14 +6,14 @@ import "C"
 import "sync"
 
 type Rectangle struct {
-	left int
-	top int
-	width int
+	left   int
+	top    int
+	width  int
 	height int
 }
 
 type TesseractAPI struct {
-	api *C.struct_TessBaseAPI
+	api      *C.struct_TessBaseAPI
 	disposed bool
-	mutex sync.Mutex
+	mutex    sync.Mutex
 }

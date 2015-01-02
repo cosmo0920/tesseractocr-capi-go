@@ -6,10 +6,10 @@ package tesseractocr
 import "C"
 import (
 	"errors"
+	lept "github.com/cosmo0920/leptonica-capi-go/leptonica"
 	"os"
 	"runtime"
 	"unsafe"
-	lept "github.com/cosmo0920/leptonica-capi-go/leptonica"
 )
 
 const (
@@ -42,7 +42,6 @@ func Env() string {
 	}
 	return env
 }
-
 
 func (t *TesseractAPI) BaseAPIClear() {
 	C.TessBaseAPIClear(t.api)
@@ -129,7 +128,7 @@ func (t *TesseractAPI) BaseAPISetVariable(name string, value string) C.int {
 	defer C.free(unsafe.Pointer(cName))
 
 	cValue := C.CString(value)
-	defer  C.free(unsafe.Pointer(cValue))
+	defer C.free(unsafe.Pointer(cValue))
 
 	return C.TessBaseAPISetVariable(t.api, cName, cValue)
 }
@@ -154,7 +153,7 @@ func (t *TesseractAPI) BaseAPIPrintVariablesToFile(name string) {
 
 func (t *TesseractAPI) BaseAPISetImage(pix *lept.Pix) {
 	cPix := pix.RawPix()
-	C.TessBaseAPISetImage2(t.api, (*C.struct_Pix)(unsafe.Pointer(cPix)));
+	C.TessBaseAPISetImage2(t.api, (*C.struct_Pix)(unsafe.Pointer(cPix)))
 }
 
 func (t *TesseractAPI) BaseAPIGetUTF8Text() string {
@@ -172,7 +171,7 @@ func (t *TesseractAPI) BaseAPIGetUTF8Text() string {
 // }
 
 func (t *TesseractAPI) BaseAPISetSourceResolution(ppi int) {
-	C.TessBaseAPISetSourceResolution(t.api, C.int(ppi));
+	C.TessBaseAPISetSourceResolution(t.api, C.int(ppi))
 }
 
 func (t *TesseractAPI) BaseAPISetRectangle(rect Rectangle) {
