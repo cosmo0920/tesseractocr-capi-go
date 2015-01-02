@@ -114,6 +114,17 @@ func (t *TesseractAPI) BaseAPISetImage(pix *lept.Pix) {
 	C.TessBaseAPISetImage2(t.api, (*C.struct_Pix)(unsafe.Pointer(cPix)));
 }
 
+func (t *TesseractAPI) BaseAPIGetUTF8Text() string {
+	cText := C.TessBaseAPIGetUTF8Text(t.api)
+	defer C.free(unsafe.Pointer(cText))
+
+	return C.GoString(cText)
+}
+
+func (t *TesseractAPI) BaseAPIEnd() {
+	C.TessBaseAPIEnd(t.api)
+}
+
 // wrapper function lept.PixClose()
 // ClearPix Ptr lept.Pix -> Unit
 func ClearPix(pix *lept.Pix) {
