@@ -4,9 +4,9 @@ sudo apt-get install python-enchant python-poppler
 n_processors="$(grep '^processor' /proc/cpuinfo | wc -l)"
 
 cd /tmp
-wget http://www.leptonica.com/source/leptonica-1.70.tar.gz
-tar -xvzof leptonica-1.70.tar.gz
-cd leptonica-1.70
+wget http://www.leptonica.com/source/leptonica-1.71.tar.gz
+tar -xvzof leptonica-1.71.tar.gz
+cd leptonica-1.71
 ./configure
 make -j${n_processors}
 sudo make install
