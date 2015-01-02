@@ -8,7 +8,7 @@ import (
 func TestBaseAPIInit2(t *testing.T) {
 	lang := "eng"
 	env := ocr.Env()
-	oem := ocr.OEM_CUBE_ONLY
+	oem := ocr.OEM_DEFAULT
 	_, err := ocr.BaseAPIInit2(env, lang, oem)
 	if err != nil {
 		t.Errorf("err = %v initialize failure", err)
