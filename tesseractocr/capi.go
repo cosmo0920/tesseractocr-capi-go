@@ -121,6 +121,13 @@ func (t *TesseractAPI) BaseAPIGetUTF8Text() string {
 	return C.GoString(cText)
 }
 
+// Since 3.03? In 3.02, this feature is not enabled....
+// func (t *TesseractAPI) BaseAPIGetOpenCLDevice() (**C.void) {
+// 	var device (**C.void)
+// 	C.TessBaseAPIGetOpenCLDevice(t.api, device)
+// 	return device
+// }
+
 func (t *TesseractAPI) BaseAPIEnd() {
 	C.TessBaseAPIEnd(t.api)
 }
