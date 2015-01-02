@@ -12,7 +12,18 @@ func TestBaseAPINew(t *testing.T) {
 	}
 }
 
-func TestBaseAPIInit(t *testing.T) {
+func TestBaseAPIInit2(t *testing.T) {
+	lang := "eng"
+	env := ocr.Env()
+	api := ocr.BaseAPINew()
+	oem := ocr.OEM_CUBE_ONLY
+	_, err := api.BaseAPIInit2(env, lang, oem)
+	if err != nil {
+		t.Errorf("err = %v initialize failure", err)
+	}
+}
+
+func TestBaseAPIInit3(t *testing.T) {
 	lang := "eng"
 	env := ocr.Env()
 	api := ocr.BaseAPINew()

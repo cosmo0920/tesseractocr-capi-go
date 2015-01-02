@@ -19,6 +19,15 @@ const (
 	unknown
 )
 
+type TessOcrEngineMode C.TessOcrEngineMode
+
+const (
+	OEM_TESSERACT_ONLY TessOcrEngineMode = iota
+	OEM_CUBE_ONLY
+	OEM_TESSERACT_CUBE_COMBINED
+	OEM_DEFAULT
+)
+
 func Version() string {
 	cVersion := C.TessVersion()
 	version := C.GoString(cVersion)
@@ -55,6 +64,21 @@ func (t *TesseractAPI) BaseAPIDelete() {
 		C.TessBaseAPIDelete(t.api)
 		t.disposed = true
 	}
+}
+
+func (t *TesseractAPI) BaseAPIInit2(env string, lang string, oem TessOcrEngineMode) (C.int, error) {
+	cEnv := C.CString(env)
+	defer C.free(unsafe.Pointer(cEnv))
+
+	cLang := C.CString(lang)
+	defer C.free(unsafe.Pointer(cLang))
+
+	rc := C.TessBaseAPIInit2(t.api, cEnv, cLang, C.TessOcrEngineMode(oem))
+	if rc != success {
+		t.BaseAPIDelete()
+		return rc, errors.New("Could not initialize tesseract.")
+	}
+	return rc, nil
 }
 
 func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
