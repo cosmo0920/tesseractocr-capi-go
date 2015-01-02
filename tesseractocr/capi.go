@@ -153,7 +153,11 @@ func (t *TesseractAPI) BaseAPIGetUTF8Text() string {
 // }
 
 func (t *TesseractAPI) BaseAPIEnd() {
-	C.TessBaseAPIEnd(t.api)
+	t.mutex.Lock()
+	defer t.mutex.Unlock()
+	if !t.disposed {
+		C.TessBaseAPIEnd(t.api)
+	}
 }
 
 // wrapper function lept.PixClose()
