@@ -96,11 +96,12 @@ func (t *TesseractAPI) BaseAPIInit3(env string, lang string) (C.int, error) {
 	return rc, nil
 }
 
-func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec C.int) string {
+func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec int) string {
 	cFilename := C.CString(filename)
 	defer C.free(unsafe.Pointer(cFilename))
 
-	out := C.TessBaseAPIProcessPages(t.api, cFilename, retry_config, 0)
+	out := C.TessBaseAPIProcessPages(t.api, cFilename, retry_config,
+		C.int(timeout_millisec))
 	result := C.GoString(out)
 	return result
 }
@@ -167,10 +168,12 @@ func ClearPix(pix *lept.Pix) {
 	pix.PixClose()
 }
 
-func (t *TesseractAPI) BaseAPISetSourceResolution(ppi C.int) {
-	C.TessBaseAPISetSourceResolution(t.api, ppi);
+func (t *TesseractAPI) BaseAPISetSourceResolution(ppi int) {
+	C.TessBaseAPISetSourceResolution(t.api, C.int(ppi));
 }
 
 func (t *TesseractAPI) BaseAPISetRectangle(rect Rectangle) {
-	C.TessBaseAPISetRectangle(t.api, rect.left, rect.top, rect.width, rect.height)
+	C.TessBaseAPISetRectangle(t.api,
+		C.int(rect.left), C.int(rect.top),
+		C.int(rect.width), C.int(rect.height))
 }

@@ -2,7 +2,7 @@ package tesseractocr
 
 import "C"
 
-func RectangleNew(left C.int, top C.int, width C.int, height C.int) (rect *Rectangle) {
+func RectangleNew(left int, top int, width int, height int) (rect *Rectangle) {
 	rect.left = left
 	rect.top = top
 	rect.width = width

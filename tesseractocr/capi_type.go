@@ -6,10 +6,10 @@ import "C"
 import "sync"
 
 type Rectangle struct {
-	left C.int
-	top C.int
-	width C.int
-	height C.int
+	left int
+	top int
+	width int
+	height int
 }
 
 type TesseractAPI struct {
