@@ -9,16 +9,21 @@ import (
 
 const abort = 3
 
-func ExampleUsage() {
-	lang := "eng"
-	filename := "fixture/golangref.tiff"
+func setupExampleTesseractAPI() (*ocr.TesseractAPI) {
 	env := ocr.Env()
-	version := ocr.Version()
-	fmt.Println("tesseract version: " + version)
+	lang := "eng"
 	api, err := ocr.BaseAPIInit3(env, lang)
 	if err != nil {
 		os.Exit(abort)
 	}
+	return api
+}
+
+func ExampleUsage() {
+	version := ocr.Version()
+	fmt.Println("tesseract version: " + version)
+	api := setupExampleTesseractAPI()
+	filename := "fixture/golangref.tiff"
 	result := api.BaseAPIProcessPages(filename, nil, 0)
 	fmt.Println(result)
 	// output: tesseract version: 3.02.02
@@ -32,15 +37,10 @@ func ExampleUsage() {
 }
 
 func ExampleBasicUsage() {
-	lang := "eng"
 	filename := "fixture/golangref.tiff"
-	env := ocr.Env()
 	version := ocr.Version()
 	fmt.Println("tesseract version: " + version)
-	api, err := ocr.BaseAPIInit3(env, lang)
-	if err != nil {
-		os.Exit(abort)
-	}
+	api := setupExampleTesseractAPI()
 	pix, _ := lept.PixRead(filename)
 	api.BaseAPISetImage(pix)
 	text := api.BaseAPIGetUTF8Text()
