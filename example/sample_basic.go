@@ -19,7 +19,10 @@ func main() {
 	if err != nil {
 		os.Exit(abort)
 	}
-	pix, _ := lept.PixRead(filename)
+	pix, err := lept.PixRead(filename)
+	if err != nil {
+		os.Exit(abort)
+	}
 	api.BaseAPISetImage(pix)
 	text := api.BaseAPIGetUTF8Text()
 	fmt.Println(text)
