@@ -48,6 +48,16 @@ const (
 	PSM_COUNT
 )
 
+type TessPageIteratorLevel C.TessPageIteratorLevel
+
+const (
+	RIL_BLOCK TessPageIteratorLevel = iota
+	RIL_PARA
+	RIL_TEXTLINE
+	RIL_WORD
+	RIL_SYMBOL
+)
+
 func Version() string {
 	cVersion := C.TessVersion()
 	version := C.GoString(cVersion)
@@ -207,4 +217,10 @@ func (t *TesseractAPI) BaseAPISetSegMode(mode TessPageSegMode) {
 func (t *TesseractAPI) BaseAPIGetSegMode() TessPageSegMode {
 	seg := C.TessBaseAPIGetPageSegMode(t.api)
 	return TessPageSegMode(seg)
+}
+
+func (t *TesseractAPI) BaseAPIGetComponentImages(level TessPageIteratorLevel,
+	flag int, pixa **C.PIXA, blockids **C.int) *C.BOXA {
+	boxaImg := C.TessBaseAPIGetComponentImages(t.api, C.TessPageIteratorLevel(level), C.int(flag), pixa, blockids)
+	return boxaImg
 }
