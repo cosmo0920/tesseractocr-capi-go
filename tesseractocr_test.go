@@ -5,6 +5,16 @@ import (
 	"testing"
 )
 
+func setupTesseractAPI(t *testing.T) *ocr.TesseractAPI {
+	lang := "eng"
+	env := ocr.Env()
+	api, err := ocr.BaseAPIInit3(env, lang)
+	if err != nil {
+		t.Errorf("err = %v initialize failure", err)
+	}
+	return api
+}
+
 func TestBaseAPIInit2(t *testing.T) {
 	lang := "eng"
 	env := ocr.Env()
@@ -39,12 +49,7 @@ func TestEnv(t *testing.T) {
 }
 
 func TestSegMode(t *testing.T) {
-		lang := "eng"
-	env := ocr.Env()
-	api, err := ocr.BaseAPIInit3(env, lang)
-	if err != nil {
-		t.Errorf("err = %v initialize failure", err)
-	}
+	api := setupTesseractAPI(t)
 	api.BaseAPISetSegMode(ocr.PSM_SINGLE_WORD)
 	mode := api.BaseAPIGetSegMode()
 	if mode != ocr.PSM_SINGLE_WORD {
