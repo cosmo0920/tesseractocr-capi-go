@@ -12,7 +12,7 @@ Before you use this library, please install `tesseract-ocr`.
 For OSX 10.9 Marvericks with homebrew:
 
 ```bash
-$ brew install tesseract-ocr --all-languages --with-tiff
+$ brew install tesseract --all-languages
 ```
 
 ### Ubuntu Linux
