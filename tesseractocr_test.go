@@ -37,3 +37,17 @@ func TestEnv(t *testing.T) {
 		t.Errorf("result = %v cannot empty string", result)
 	}
 }
+
+func TestSegMode(t *testing.T) {
+		lang := "eng"
+	env := ocr.Env()
+	api, err := ocr.BaseAPIInit3(env, lang)
+	if err != nil {
+		t.Errorf("err = %v initialize failure", err)
+	}
+	api.BaseAPISetSegMode(ocr.PSM_SINGLE_WORD)
+	mode := api.BaseAPIGetSegMode()
+	if mode != ocr.PSM_SINGLE_WORD {
+		t.Errorf("mode = %v cannot empty number", mode)
+	}
+}

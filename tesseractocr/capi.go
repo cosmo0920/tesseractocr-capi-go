@@ -29,6 +29,25 @@ const (
 	OEM_DEFAULT
 )
 
+type TessPageSegMode C.TessPageSegMode
+
+const (
+	PSM_OSD_ONLY TessPageSegMode = iota
+	PSM_AUTO_OSD
+	PSM_AUTO_ONLY
+	PSM_AUTO
+	PSM_SINGLE_COLUMN
+	PSM_SINGLE_BLOCK_VERT_TEXT
+	PSM_SINGLE_BLOCK
+	PSM_SINGLE_LINE
+	PSM_SINGLE_WORD
+	PSM_CIRCLE_WORD
+	PSM_SINGLE_CHAR
+	PSM_SPARSE_TEXT
+	PSM_SPARSE_TEXT_OSD
+	PSM_COUNT
+)
+
 func Version() string {
 	cVersion := C.TessVersion()
 	version := C.GoString(cVersion)
@@ -179,4 +198,13 @@ func (t *TesseractAPI) BaseAPISetRectangle(rect Rectangle) {
 	C.TessBaseAPISetRectangle(t.api,
 		C.int(rect.left), C.int(rect.top),
 		C.int(rect.width), C.int(rect.height))
+}
+
+func (t* TesseractAPI) BaseAPISetSegMode(mode TessPageSegMode) {
+	C.TessBaseAPISetPageSegMode(t.api, C.TessPageSegMode(mode))
+}
+
+func (t* TesseractAPI) BaseAPIGetSegMode() TessPageSegMode {
+	seg := C.TessBaseAPIGetPageSegMode(t.api)
+	return TessPageSegMode(seg)
 }
