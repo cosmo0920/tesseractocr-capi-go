@@ -200,11 +200,11 @@ func (t *TesseractAPI) BaseAPISetRectangle(rect Rectangle) {
 		C.int(rect.width), C.int(rect.height))
 }
 
-func (t* TesseractAPI) BaseAPISetSegMode(mode TessPageSegMode) {
+func (t *TesseractAPI) BaseAPISetSegMode(mode TessPageSegMode) {
 	C.TessBaseAPISetPageSegMode(t.api, C.TessPageSegMode(mode))
 }
 
-func (t* TesseractAPI) BaseAPIGetSegMode() TessPageSegMode {
+func (t *TesseractAPI) BaseAPIGetSegMode() TessPageSegMode {
 	seg := C.TessBaseAPIGetPageSegMode(t.api)
 	return TessPageSegMode(seg)
 }
