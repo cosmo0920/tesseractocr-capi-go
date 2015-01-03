@@ -48,6 +48,6 @@ func TestSegMode(t *testing.T) {
 	api.BaseAPISetSegMode(ocr.PSM_SINGLE_WORD)
 	mode := api.BaseAPIGetSegMode()
 	if mode != ocr.PSM_SINGLE_WORD {
-		t.Errorf("mode = %v cannot empty number", mode)
+		t.Errorf("mode = %v cannot default (PSM_SINGLE_BLOCK)", mode)
 	}
 }
