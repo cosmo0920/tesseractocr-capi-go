@@ -220,7 +220,7 @@ func (t *TesseractAPI) BaseAPIGetSegMode() TessPageSegMode {
 }
 
 func (t *TesseractAPI) BaseAPIGetComponentImages(level TessPageIteratorLevel,
-	flag int, pixa **C.PIXA, blockids **C.int) *C.BOXA {
+	flag int, pixa **C.struct_Pixa, blockids **C.int) *C.struct_Boxa {
 	boxaImg := C.TessBaseAPIGetComponentImages(t.api, C.TessPageIteratorLevel(level), C.int(flag), pixa, blockids)
 	return boxaImg
 }
