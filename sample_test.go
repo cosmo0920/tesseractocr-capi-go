@@ -20,14 +20,11 @@ func setupExampleTesseractAPI() (*ocr.TesseractAPI) {
 }
 
 func ExampleUsage() {
-	version := ocr.Version()
-	fmt.Println("tesseract version: " + version)
-	api := setupExampleTesseractAPI()
 	filename := "fixture/golangref.tiff"
+	api := setupExampleTesseractAPI()
 	result := api.BaseAPIProcessPages(filename, nil, 0)
 	fmt.Println(result)
-	// output: tesseract version: 3.02.02
-	// Function pointer callbacks
+	// output: Function pointer callbacks
 	//
 	// C code can call exported Go functions with their explicit name. But if a C—program wants a function pointer, a gateway function has to be written.
 	// This is because we can't take the address of a Go function and give that to C—code since the cgo tool will generate a stub in C that should be
@@ -38,15 +35,12 @@ func ExampleUsage() {
 
 func ExampleBasicUsage() {
 	filename := "fixture/golangref.tiff"
-	version := ocr.Version()
-	fmt.Println("tesseract version: " + version)
 	api := setupExampleTesseractAPI()
 	pix, _ := lept.PixRead(filename)
 	api.BaseAPISetImage(pix)
 	text := api.BaseAPIGetUTF8Text()
 	fmt.Println(text)
-	// output: tesseract version: 3.02.02
-	// Function pointer callbacks
+	// output: Function pointer callbacks
 	//
 	// C code can call exported Go functions with their explicit name. But if a C—program wants a function pointer, a gateway function has to be written.
 	// This is because we can't take the address of a Go function and give that to C—code since the cgo tool will generate a stub in C that should be
