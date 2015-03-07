@@ -37,6 +37,10 @@ $ sudo pkg install -y tesseract pkgconf
 $ sudo pkg install -y tesseract-data
 ```
 
+### Windows
+
+Not supported yet.
+
 ## import
 
 This library depends on https://github.com/cosmo0920/leptonica-capi-go/.
