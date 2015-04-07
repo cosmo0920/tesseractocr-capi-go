@@ -1,21 +1,18 @@
 language: go
-
 go:
   - 1.1
   - 1.2
   - 1.3
   - 1.4
   - tip
-
 matrix:
   allow_failures:
       - go: tip
 
+before_install:
+  - go get github.com/mattn/gom
 install:
   - bash install.sh
-
 script:
-  - go get "github.com/cosmo0920/leptonica-capi-go"
-  - go build
-  - go build example/sample.go
-  - go test -run "Test*" # ingore example test... :<
+  - $HOME/gopath/bin/gom install
+  - $HOME/gopath/bin/gom test -run "Test*" # ingore example test... :<
