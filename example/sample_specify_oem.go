@@ -1,7 +1,7 @@
 package main
 
 import (
-	ocr "github.com/cosmo0920/tesseract-ocr-capi-go"
+	ocr "github.com/cosmo0920/tesseractocr-capi-go"
 	"fmt"
 	"os"
 )
