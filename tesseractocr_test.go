@@ -1,7 +1,7 @@
 package tesseractocr_test
 
 import (
-	ocr "github.com/cosmo0920/tesseract-ocr-capi-go"
+	ocr "."
 	"testing"
 )
 
