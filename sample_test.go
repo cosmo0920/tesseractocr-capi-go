@@ -2,14 +2,14 @@ package tesseractocr_test
 
 import (
 	ocr "."
-	lept "github.com/cosmo0920/leptonica-capi-go"
 	"fmt"
+	lept "github.com/cosmo0920/leptonica-capi-go"
 	"os"
 )
 
 const abort = 3
 
-func setupExampleTesseractAPI() (*ocr.TesseractAPI) {
+func setupExampleTesseractAPI() *ocr.TesseractAPI {
 	env := ocr.Env()
 	lang := "eng"
 	api, err := ocr.BaseAPIInit3(env, lang)
