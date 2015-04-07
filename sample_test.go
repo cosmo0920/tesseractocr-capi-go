@@ -1,7 +1,7 @@
 package tesseractocr_test
 
 import (
-	ocr "./tesseractocr"
+	ocr "github.com/cosmo0920/tesseract-ocr-capi-go"
 	lept "github.com/cosmo0920/leptonica-capi-go/leptonica"
 	"fmt"
 	"os"

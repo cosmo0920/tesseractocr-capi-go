@@ -15,6 +15,7 @@ install:
   - bash install.sh
 
 script:
-  - go get "github.com/cosmo0920/leptonica-capi-go/leptonica"
+  - go get "github.com/cosmo0920/leptonica-capi-go"
+  - go build
   - go build example/sample.go
   - go test -run "Test*" # ingore example test... :<

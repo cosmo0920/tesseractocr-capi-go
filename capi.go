@@ -6,7 +6,7 @@ package tesseractocr
 import "C"
 import (
 	"errors"
-	lept "github.com/cosmo0920/leptonica-capi-go/leptonica"
+	lept "github.com/cosmo0920/leptonica-capi-go"
 	"os"
 	"runtime"
 	"unsafe"

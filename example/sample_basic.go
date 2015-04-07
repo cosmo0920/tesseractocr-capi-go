@@ -1,8 +1,8 @@
 package main
 
 import (
-	ocr "../tesseractocr"
-	lept "github.com/cosmo0920/leptonica-capi-go/leptonica"
+	ocr "github.com/cosmo0920/tesseract-ocr-capi-go"
+	lept "github.com/cosmo0920/leptonica-capi-go"
 	"fmt"
 	"os"
 )
