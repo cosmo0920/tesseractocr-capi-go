@@ -18,7 +18,6 @@ script:
   - $HOME/gopath/bin/gom test -run "Test*" # ingore example test... :<
 
 after_script:
-  - go get github.com/cosmo0920/tesseractocr-capi-go
   - gom build example/sample.go
   - gom build example/sample_basic.go
   - gom build example/sample_specify_oem.go
