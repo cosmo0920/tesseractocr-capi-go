@@ -7,7 +7,7 @@ TesseractOCR C API Go wrapper
 
 Before you use this library, please install `tesseract-ocr`.
 
-* tesseract-ocr 3.02 needs for tests passing
+* tesseract-ocr 3.02 needs for all tests passing
 * tesseract-ocr 3.03 also supported but some tests failing
 
 ### OSX
