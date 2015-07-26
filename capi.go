@@ -153,6 +153,19 @@ func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char
 	return result
 }
 
+func (t *TesseractAPI) BaseAPIProcessPage(filename string, pix *lept.Pix, page_index int, retry_config *C.char, timeout_millisec int) string {
+	cFilename := C.CString(filename)
+	defer C.free(unsafe.Pointer(cFilename))
+	cPix := pix.RawPix()
+
+	out := C.TessBaseAPIProcessPage(
+		t.api, (*C.struct_Pix)(unsafe.Pointer(cPix)),
+		C.int(page_index), cFilename,
+		retry_config, C.int(timeout_millisec))
+	result := C.GoString(out)
+	return result
+}
+
 func (t *TesseractAPI) BaseAPISetVariable(name string, value string) C.int {
 	cName := C.CString(name)
 	defer C.free(unsafe.Pointer(cName))
