@@ -40,7 +40,7 @@ func TestBaseAPISetVariable(t *testing.T) {
 	api.BaseAPISetVariable("tessedit_char_whitelist", value)
 	result, err := api.BaseAPIGetStringVariable("tessedit_char_whitelist")
 	if err != nil {
-		t.Errorf("result == %v assertion failed", result)
+		t.Errorf("got GetStringVariable API error", result)
 	}
 }
 
