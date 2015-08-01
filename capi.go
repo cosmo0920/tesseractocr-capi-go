@@ -196,15 +196,18 @@ func (t *TesseractAPI) BaseAPIGetDoubleVariable(name string) C.double {
 	return cValue
 }
 
-func (t *TesseractAPI) BaseAPIGetStringVariable(name string) string {
+func (t *TesseractAPI) BaseAPIGetStringVariable(name string) (string, error) {
 	cName := C.CString(name)
 	defer C.free(unsafe.Pointer(cName))
 
 	cValue := C.TessBaseAPIGetStringVariable(t.api, cName)
 
 	goValue := C.GoString(cValue)
+	if goValue == "" {
+		return "", errors.New("Could not get variable contents")
+	}
 
-	return goValue
+	return goValue, nil
 }
 
 func (t *TesseractAPI) BaseAPISetInputName(name string) {

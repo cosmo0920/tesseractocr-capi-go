@@ -38,8 +38,8 @@ func TestBaseAPISetVariable(t *testing.T) {
 	api := setupTesseractAPI(t)
 	value := "0123456789"
 	api.BaseAPISetVariable("tessedit_char_whitelist", value)
-	result := api.BaseAPIGetStringVariable("tessedit_char_whitelist")
-	if result != value {
+	result, err := api.BaseAPIGetStringVariable("tessedit_char_whitelist")
+	if err != nil {
 		t.Errorf("result == %v assertion failed", result)
 	}
 }
