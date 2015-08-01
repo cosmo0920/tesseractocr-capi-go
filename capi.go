@@ -176,6 +176,26 @@ func (t *TesseractAPI) BaseAPISetVariable(name string, value string) C.int {
 	return C.TessBaseAPISetVariable(t.api, cName, cValue)
 }
 
+func (t *TesseractAPI) BaseAPIGetIntVariable(name string) C.int {
+	cName := C.CString(name)
+	defer C.free(unsafe.Pointer(cName))
+
+	var cValue C.int
+	C.TessBaseAPIGetIntVariable(t.api, cName, &cValue)
+
+	return cValue
+}
+
+func (t *TesseractAPI) BaseAPIGetDoubleVariable(name string) C.double {
+	cName := C.CString(name)
+	defer C.free(unsafe.Pointer(cName))
+
+	var cValue C.double
+	C.TessBaseAPIGetDoubleVariable(t.api, cName, &cValue)
+
+	return cValue
+}
+
 func (t *TesseractAPI) BaseAPIGetStringVariable(name string) string {
 	cName := C.CString(name)
 	defer C.free(unsafe.Pointer(cName))
