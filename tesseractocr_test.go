@@ -34,6 +34,16 @@ func TestBaseAPIInit3(t *testing.T) {
 	}
 }
 
+func TestBaseAPISetVariable(t *testing.T) {
+	api := setupTesseractAPI(t)
+	value := "0123456789"
+	api.BaseAPISetVariable("tessedit_char_whitelist", value)
+	result := api.BaseAPIGetStringVariable("tessedit_char_whitelist")
+	if result != value {
+		t.Errorf("result == %v assertion failed", result)
+	}
+}
+
 func TestVersion(t *testing.T) {
 	result := ocr.Version()
 	if result == "" {
