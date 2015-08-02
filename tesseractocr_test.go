@@ -42,6 +42,9 @@ func TestBaseAPISetVariable(t *testing.T) {
 	if err != nil {
 		t.Errorf("got GetStringVariable API error", result)
 	}
+	if result != value {
+		t.Errorf("result == %v assertion failed", result)
+	}
 }
 
 func TestVersion(t *testing.T) {
