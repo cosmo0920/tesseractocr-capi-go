@@ -1,2 +1,2 @@
-install leptonica --with-libtiff || true
-instal tesseract --with-libtiff --all-languages || true
+brew 'leptonica', args: ['with-libtiff']
+brew 'tesseract', args: ['with-libtiff', 'all-languages']
