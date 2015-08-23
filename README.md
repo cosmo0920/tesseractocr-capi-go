@@ -46,14 +46,14 @@ Not supported yet.
 This library depends on https://github.com/cosmo0920/leptonica-capi-go/.
 
 ```bash
-$ go get "github.com/cosmo0920/leptonica-capi-go/leptonica"
-$ go get "github.com/cosmo0920/tesseractocr-capi-go/tesseractocr"
+$ go get "github.com/cosmo0920/leptonica-capi-go/"
+$ go get "github.com/cosmo0920/tesseractocr-capi-go/"
 ```
 
 and then,
 
 ```go
-import "github.com/cosmo0920/tesseractocr-capi-go/tesseractocr"
+import "github.com/cosmo0920/tesseractocr-capi-go/"
 ```
 
 ## LICENSE
