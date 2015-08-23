@@ -143,27 +143,34 @@ func BaseAPIInit3(env string, lang string) (*TesseractAPI, error) {
 	return instance, nil
 }
 
-func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec int) string {
+func (t *TesseractAPI) BaseAPIProcessPages(filename string, retry_config *C.char, timeout_millisec int, renderer *C.TessResultRenderer) (*C.TessResultRenderer, error) {
 	cFilename := C.CString(filename)
 	defer C.free(unsafe.Pointer(cFilename))
 
-	out := C.TessBaseAPIProcessPages(t.api, cFilename, retry_config,
-		C.int(timeout_millisec))
-	result := C.GoString(out)
-	return result
+	result := C.TessBaseAPIProcessPages(t.api, cFilename, retry_config,
+		C.int(timeout_millisec), renderer)
+
+	if result != 0 {
+		return renderer, errors.New("Fail to get result")
+	}
+	return renderer, nil
 }
 
-func (t *TesseractAPI) BaseAPIProcessPage(filename string, pix *lept.Pix, page_index int, retry_config *C.char, timeout_millisec int) string {
+func (t *TesseractAPI) BaseAPIProcessPage(filename string, pix *lept.Pix, page_index int, retry_config *C.char, timeout_millisec int, renderer *C.TessResultRenderer) (*C.TessResultRenderer, error) {
 	cFilename := C.CString(filename)
 	defer C.free(unsafe.Pointer(cFilename))
 	cPix := pix.RawPix()
 
-	out := C.TessBaseAPIProcessPage(
+	result := C.TessBaseAPIProcessPage(
 		t.api, (*C.struct_Pix)(unsafe.Pointer(cPix)),
 		C.int(page_index), cFilename,
-		retry_config, C.int(timeout_millisec))
-	result := C.GoString(out)
-	return result
+		retry_config, C.int(timeout_millisec),
+		renderer)
+
+	if result != C.TRUE {
+		return renderer, errors.New("Fail to get result")
+	}
+	return renderer, nil
 }
 
 func (t *TesseractAPI) BaseAPISetVariable(name string, value string) C.int {
