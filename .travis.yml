@@ -13,7 +13,7 @@ matrix:
 before_install:
   - go get github.com/mattn/gom
 install:
-  - bash install.sh
+  - bash travis/install.sh
 script:
   - $HOME/gopath/bin/gom install
   - $HOME/gopath/bin/gom test -run "Test*" # ingore example test... :<
