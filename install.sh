@@ -3,19 +3,21 @@ sudo apt-get install libpng12-dev libjpeg62-dev libtiff4-dev libsdl-gfx1.2-dev l
 sudo apt-get install python-enchant python-poppler
 n_processors="$(grep '^processor' /proc/cpuinfo | wc -l)"
 
+export LEPTONICA_VERSION="1.71"
 cd /tmp
-wget http://www.leptonica.com/source/leptonica-1.71.tar.gz
-tar -xvzof leptonica-1.71.tar.gz
-cd leptonica-1.71
+wget http://www.leptonica.com/source/leptonica-${LEPTONICA_VERSION}.tar.gz
+tar -xvzof leptonica-${LEPTONICA_VERSION}.tar.gz
+cd leptonica-${LEPTONICA_VERSION}
 ./configure
 make -j${n_processors}
 sudo make install
 sudo ldconfig
 
+export TESSERACT_VERSION="3.02.02"
 cd /tmp
-wget http://tesseract-ocr.googlecode.com/files/tesseract-3.02.02.tar.gz
-tar -xvzof tesseract-3.02.02.tar.gz
-cd tesseract-3.02.02
+wget http://tesseract-ocr.googlecode.com/files/tesseract-${TESSERACT_VERSION}.tar.gz
+tar -xvzof tesseract-${TESSERACT_VERSION}.tar.gz
+cd tesseract-${TESSERACT_VERSION}
 automake
 ./configure
 sudo rm -f /usr/local/share/tessdata
