@@ -9,6 +9,7 @@ Before you use this library, please install `tesseract-ocr`.
 
 * tesseract-ocr 3.02 needs for all tests passing
 * tesseract-ocr 3.03 also supported but some tests failing
+* tesseract-ocr 3.04 is not supported yet.
 
 ### OSX
 
