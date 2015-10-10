@@ -24,7 +24,7 @@ $ brew install tesseract --all-languages
 For Ubuntu Linux 14.04 LTS (Trusty Tahr):
 
 ```bash
-$ sudo apt-get install libtesserac-dev libleptonica-dev
+$ sudo apt-get install libtesseract-dev libleptonica-dev
 $ sudo apt-get install tesseract-ocr-eng tesseract-ocr-jpn
 ```
 
