@@ -13,7 +13,9 @@ Before you use this library, please install `tesseract-ocr`.
 
 ### OSX
 
-For OSX 10.9 Marvericks with homebrew:
+For OSX 10.9 Marvericks or higherwith homebrew:
+
+You must do git checkout with tesseract 3.03 version.
 
 ```bash
 $ brew install tesseract --all-languages
@@ -63,6 +65,6 @@ import "github.com/cosmo0920/tesseractocr-capi-go/"
 
 ## Support platform
 
-* OSX 10.9 Marvericks with homebrew
+* OSX 10.9 Marvericks or higher with homebrewed tesseract 3.03
 * Ubuntu Linux 14.04 LTS (Trusty Tahr)
 * FreeBSD 10 release with pkgng
