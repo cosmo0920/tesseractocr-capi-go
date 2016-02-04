@@ -13,12 +13,11 @@ Before you use this library, please install `tesseract-ocr`.
 
 ### OSX
 
-For OSX 10.9 Marvericks or higherwith homebrew:
-
-You must do git checkout with tesseract 3.03 version.
+You must tap cosmo0920/tesseract-versioned before installing.
 
 ```bash
-$ brew install tesseract --all-languages
+$ brew tap cosmo0920/tesseract-versioned
+$ brew install tesseract302 --all-languages
 ```
 
 ### Ubuntu Linux
