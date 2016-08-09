@@ -1,4 +1,10 @@
 language: go
+
+env:
+  global:
+    - GO15VENDOREXPERIMENT=0
+    - GOMAXPROCS=8
+
 go:
   - 1.4
   - 1.5
