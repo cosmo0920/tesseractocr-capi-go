@@ -2,7 +2,7 @@ language: go
 
 env:
   global:
-    - GO15VENDOREXPERIMENT=0
+    - GO15VENDOREXPERIMENT=1
     - GOMAXPROCS=8
 
 go:
