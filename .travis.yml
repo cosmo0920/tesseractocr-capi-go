@@ -2,14 +2,13 @@ language: go
 
 env:
   global:
-    - GO15VENDOREXPERIMENT=0
+    - GO15VENDOREXPERIMENT=1
     - GOMAXPROCS=8
 
 go:
-  - 1.4
   - 1.5
   - 1.6
-  - 1.7rc6
+  - 1.7
   - tip
 matrix:
   allow_failures:
