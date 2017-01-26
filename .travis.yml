@@ -23,6 +23,6 @@ script:
   - $HOME/gopath/bin/gom test -run "Test*" # ingore example test... :<
 
 after_script:
-  - gom build example/sample.go
-  - gom build example/sample_basic.go
-  - gom build example/sample_specify_oem.go
+  - gom build _example/sample.go
+  - gom build _example/sample_basic.go
+  - gom build _example/sample_specify_oem.go
