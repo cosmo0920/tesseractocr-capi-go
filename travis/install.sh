@@ -15,10 +15,10 @@ sudo ldconfig
 
 export TESSERACT_VERSION="3.02.02"
 cd /tmp
-wget http://tesseract-ocr.googlecode.com/files/tesseract-${TESSERACT_VERSION}.tar.gz
-tar -xvzof tesseract-${TESSERACT_VERSION}.tar.gz
+wget https://github.com/tesseract-ocr/tesseract/archive/${TESSERACT_VERSION}.tar.gz
+tar -xvzof ${TESSERACT_VERSION}.tar.gz
 cd tesseract-${TESSERACT_VERSION}
-automake
+./autogen.sh
 ./configure
 sudo rm -f /usr/local/share/tessdata
 sudo mkdir /usr/local/share/tessdata
@@ -27,10 +27,8 @@ sudo make install
 sudo ldconfig
 
 cd /tmp
-wget http://tesseract-ocr.googlecode.com/files/eng.traineddata.gz
-wget http://tesseract-ocr.googlecode.com/files/jpn.traineddata.gz
+wget https://github.com/tesseract-ocr/tessdata/raw/3.04.00/eng.traineddata
+wget https://github.com/tesseract-ocr/tessdata/blob/master/jpn.traineddata
 cd /usr/local/share/tessdata
-gzip -d /tmp/eng.traineddata.gz
-gzip -d /tmp/jpn.traineddata.gz
 sudo cp /tmp/eng.traineddata /usr/local/share/tessdata
 sudo cp /tmp/jpn.traineddata /usr/local/share/tessdata
