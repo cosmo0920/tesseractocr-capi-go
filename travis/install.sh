@@ -3,7 +3,7 @@ sudo apt-get install libpng12-dev libjpeg62-dev libtiff4-dev libsdl-gfx1.2-dev l
 sudo apt-get install python-enchant python-poppler
 n_processors="$(grep '^processor' /proc/cpuinfo | wc -l)"
 
-export LEPTONICA_VERSION="1.71"
+export LEPTONICA_VERSION="1.74"
 cd /tmp
 wget http://www.leptonica.com/source/leptonica-${LEPTONICA_VERSION}.tar.gz
 tar -xvzof leptonica-${LEPTONICA_VERSION}.tar.gz
