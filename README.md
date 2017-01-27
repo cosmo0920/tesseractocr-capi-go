@@ -29,6 +29,8 @@ $ sudo apt-get install libtesseract-dev libleptonica-dev
 $ sudo apt-get install tesseract-ocr-eng tesseract-ocr-jpn
 ```
 
+And install by yourself libleptonica 1.74 or later.
+
 ### FreeBSD (pkgng)
 
 FreeBSD 10 release with pkgng:
